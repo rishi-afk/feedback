@@ -2,7 +2,7 @@ import path from "path";
 import { promises as fs } from "fs";
 
 async function loadAllTextFiles() {
-  const p = path.join(process.cwd(), "feedback");
+  const p = path.join(process.cwd(), "app/feedback");
   const files = await fs.readdir(p);
   const contentArray = [];
   for (const file of files) {
