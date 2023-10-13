@@ -1,10 +1,31 @@
 export const dynamic = "force-dynamic";
+import fs from "fs";
+import path from "path";
 
 type Feedback = {
   name?: string;
   data: string;
   roll?: string;
 };
+
+async function loadAllTextFiles() {
+  const p = path.join(process.cwd(), "data");
+  const files = fs.readdirSync(p);
+  console.log(files);
+  const contentArray: Feedback[] = [];
+  // for (const file of files) {
+  //   if (file.endsWith(".txt")) {
+  //     const fileName = file.split(".")[0];
+  //     const content = await fs.readFile(`${p}/${file}`, "utf-8");
+  //     contentArray.push({
+  //       data: content,
+  //       name: fileName.split("-")[0]?.trim(),
+  //       roll: fileName.split("-")[1]?.trim(),
+  //     });
+  //   }
+  // }
+  return contentArray;
+}
 
 function ReviewCard({ data, name, roll }: Feedback) {
   return (
@@ -31,12 +52,7 @@ function ReviewCard({ data, name, roll }: Feedback) {
 }
 
 export default async function Home() {
-  const url =
-    process.env.NODE_ENV === "production"
-      ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api`
-      : "http://localhost:3000/api";
-  const res = await fetch(url);
-  const contentArray = (await res.json()) as Feedback[];
+  const contentArray: Feedback[] = await loadAllTextFiles();
   return (
     <div className="relative flex min-h-screen bg-gray-100 text-gray-800 py-6 sm:py-12">
       <div className="container mx-auto max-w-screen-xl px-6 xl:p-0">
