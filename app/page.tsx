@@ -9,7 +9,7 @@ type Feedback = {
 };
 
 async function loadAllTextFiles() {
-  const p = path.join(process.cwd(), "feedback");
+  const p = path.join(process.cwd(), "public/feedback");
   const files = await fs.readdir(p);
   const contentArray = [];
   for (const file of files) {
