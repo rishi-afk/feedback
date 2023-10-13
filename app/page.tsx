@@ -11,19 +11,18 @@ type Feedback = {
 async function loadAllTextFiles() {
   const p = path.join(process.cwd(), "data");
   const files = fs.readdirSync(p);
-  console.log(files);
   const contentArray: Feedback[] = [];
-  // for (const file of files) {
-  //   if (file.endsWith(".txt")) {
-  //     const fileName = file.split(".")[0];
-  //     const content = await fs.readFile(`${p}/${file}`, "utf-8");
-  //     contentArray.push({
-  //       data: content,
-  //       name: fileName.split("-")[0]?.trim(),
-  //       roll: fileName.split("-")[1]?.trim(),
-  //     });
-  //   }
-  // }
+  for (const file of files) {
+    if (file.endsWith(".txt")) {
+      const fileName = file.split(".")[0];
+      const content = fs.readFileSync(`${p}/${file}`, "utf-8");
+      contentArray.push({
+        data: content,
+        name: fileName.split("-")[0]?.trim(),
+        roll: fileName.split("-")[1]?.trim(),
+      });
+    }
+  }
   return contentArray;
 }
 
