@@ -51,6 +51,7 @@ function ReviewCard({ data, name, roll }: Feedback) {
 }
 
 export default async function Home() {
+  // Loading text files
   const contentArray: Feedback[] = await loadAllTextFiles();
   return (
     <div className="relative flex min-h-screen bg-gray-100 text-gray-800 py-6 sm:py-12">
